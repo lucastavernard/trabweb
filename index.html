@@ -1,0 +1,44 @@
+
+<html>
+<head>
+    <title>Vendas</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        function calcularFrete() {
+            var cep = document.getElementById('cep').value;
+
+            
+            $.get('https://viacep.com.br/ws/' + cep + '/json/', function(data) {
+                
+                document.getElementById('logradouro').value = data.logradouro;
+                document.getElementById('bairro').value = data.bairro;
+                document.getElementById('cidade').value = data.localidade;
+                document.getElementById('estado').value = data.uf;
+            });
+        }
+    </script>
+</head>
+<body>
+    <h2>Venda de Produtos</h2>
+    <form action="registrar_venda.php" method="post">
+        <label for="cep">CEP:</label>
+        <input type="text" id="cep" name="cep" onblur="calcularFrete()" required>
+
+        <label for="logradouro">Logradouro:</label>
+        <input type="text" id="logradouro" name="logradouro" readonly>
+
+        <label for="bairro">Bairro:</label>
+        <input type="text" id="bairro" name="bairro" readonly>
+
+        <label for="cidade">Cidade:</label>
+        <input type="text" id="cidade" name="cidade" readonly>
+
+        <label for="estado">Estado:</label>
+        <input type="text" id="estado" name="estado" readonly>
+
+        
+
+        <button type="submit">Registrar Venda</button>
+    </form>
+</body>
+</html>
